@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Thinklab-SJTU/Bench2Drive-Speed">📄 arXiv (comming soon)</a> |
+  <a href="https://arxiv.org/abs/2603.25672">📄 arXiv </a> |
   <a href="https://thinklab-sjtu.github.io/Bench2Drive-Speed/">🌐 Website</a> |
   <a href="https://huggingface.co/datasets/rethinklab/Bench2Drive-Speed">📁 Dataset</a> |
   <a href="https://huggingface.co/rethinklab/TCP-Speed">🤖 Baseline</a>
@@ -228,11 +228,13 @@ All assets and code are under the CC-BY-NC-ND unless specified otherwise.
 ## 📜 Citation
 
 ```bibtex
-@article{bench2drive_speed,
-  title={Can Users Specify Driving Speed? Bench2Drive-Speed: Benchmark and Baselines for Desired-Speed Conditioned Autonomous Driving},
-  author={Yuqian Shao and Xiaosong Jia and Langechuan Liu and Junchi Yan},
-  journal={...},
-  year={2026}
+@article{Bench2DriveSpeed,
+    title={Can Users Specify Driving Speed? Bench2Drive-Speed: Benchmark and Baselines for Desired-Speed Conditioned Autonomous Driving}, 
+    author={Yuqian Shao and Xiaosong Jia and Langechuan Liu and Junchi Yan},
+    year={2026},
+    eprint={2603.25672},
+    archivePrefix={arXiv},
+    primaryClass={cs.RO},
 }
 ```
 
