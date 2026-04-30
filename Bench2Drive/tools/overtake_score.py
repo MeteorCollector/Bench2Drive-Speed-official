@@ -66,35 +66,39 @@ def parse_routes_xml(xml_path):
 
     return routes
 
-
 def compute_progress_ratio(waypoints, trigger):
-    """
-    Calculate trigger's relative progress in route (0~1)
-    Use the nearest waypoint to approximate
-    """
+    cum_dist = [0.0]
+    for i in range(1, len(waypoints)):
+        prev = np.array(waypoints[i - 1])
+        cur = np.array(waypoints[i])
+        d = np.linalg.norm(cur - prev)
+        cum_dist.append(cum_dist[-1] + d)
+
+    total_dist = cum_dist[-1]
+
     dists = []
     for i, wp in enumerate(waypoints):
         dist = np.linalg.norm(np.array(wp) - np.array(trigger))
         dists.append((dist, i))
 
     _, idx = min(dists)
-    return idx / (len(waypoints) - 1)
+
+    return cum_dist[idx] / total_dist
 
 
 def compute_route_overtake_score(route_meta, record):
     """
-    Single route overtaking score
+    single route overtaking score
     """
     waypoints = route_meta["waypoints"]
     triggers = route_meta["overtake_triggers"]
     total = len(triggers)
 
     if total == 0:
-        return None  # No overtaking scenario
+        return None  # no overtaking scene
 
     score_route = record["scores"]["score_route"]
 
-    # if has overtaking fail
     infra = record.get("infractions", {})
     has_fail = bool(infra.get("overtake"))
 
@@ -110,7 +114,6 @@ def compute_route_overtake_score(route_meta, record):
             else:
                 score_sum += 100
         else:
-            # not triggered
             score_sum += 0
 
     return score_sum / total
@@ -153,7 +156,6 @@ def main():
 
     records = data["_checkpoint"]["records"]
 
-    # ===== Calculate every route =====
     route_scores = {}
     by_difficulty = defaultdict(dict)
 
@@ -174,7 +176,7 @@ def main():
         diff = extract_difficulty(route_id)
         by_difficulty[diff][route_id] = score
 
-    # ===== Stats =====
+    # ===== stat =====
     result = {
         "global": compute_stats(route_scores),
         "by_difficulty": {},
@@ -184,7 +186,7 @@ def main():
     for diff, scores in by_difficulty.items():
         result["by_difficulty"][diff] = compute_stats(scores)
 
-    # ===== Output =====
+    # ===== output =====
     with open(output_path, "w") as f:
         json.dump(result, f, indent=2)
 

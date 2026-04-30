@@ -90,7 +90,7 @@ def main(args):
     map_root = os.path.join(os.environ.get("CARLA_ROOT", "."), "CarlaUE4/Content/Carla/Maps")   # OFFLINE MOD
     print(f"[debug] map_root = {map_root}")
 
-    Ability_Statistic = {k: [0, 0] for k in Ability}
+    Ability_Statistic = {k: [0, 0] for k in Ability}  # [success_count, total_count]
     Success_Statistic = {}
     crash_route_list = []
 
@@ -125,7 +125,7 @@ def main(args):
         update_Ability(scenario_name, Ability_Statistic, record_success_status)
         update_Success(scenario_name, Success_Statistic, record_success_status)
 
-        if scenario_name in Ability["Traffic_Signs"]:
+        if scenario_name in Ability["Traffic_Signs"] and not record_success_status:
             if town_name != current_town:
                 current_town = town_name
                 carla_map = load_offline_map(current_town, map_root)
@@ -148,7 +148,6 @@ def main(args):
             stop_infraction = route_record["infractions"]["stop_infraction"]
             red_light_infraction = route_record["infractions"]["red_light"]
 
-            Ability_Statistic['Traffic_Signs'][1] += 1
             if record_completion > junction_completion and \
                not stop_infraction and not red_light_infraction:
                 Ability_Statistic['Traffic_Signs'][0] += 1
