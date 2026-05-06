@@ -11,8 +11,6 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2603.25672">📄 arXiv </a> |
-  <a href="https://thinklab-sjtu.github.io/Bench2Drive-Speed/">🌐 Website</a> |
   <a href="https://huggingface.co/datasets/rethinklab/Bench2Drive-Speed">📁 Dataset</a> |
   <a href="https://huggingface.co/rethinklab/TCP-Speed">🤖 Baseline</a>
 </p>
@@ -225,17 +223,5 @@ In addition to the default CARLA autonomous driving agents, you can use `self.ge
 ## 📝 License
 All assets and code are under the CC-BY-NC-ND unless specified otherwise.
 
-## 📜 Citation
-
-```bibtex
-@article{Bench2DriveSpeed,
-    title={Can Users Specify Driving Speed? Bench2Drive-Speed: Benchmark and Baselines for Desired-Speed Conditioned Autonomous Driving}, 
-    author={Yuqian Shao and Xiaosong Jia and Langechuan Liu and Junchi Yan},
-    year={2026},
-    eprint={2603.25672},
-    archivePrefix={arXiv},
-    primaryClass={cs.RO},
-}
-```
 
 ---
